@@ -1,0 +1,32 @@
+<div class="column">
+	<nav class="panel">
+		<p class="panel-heading">
+			Who to Follow
+		</p>
+	</nav>
+	<% @users.each do |user|%>
+		<div class="panel-block">
+			<article class="media">
+				<div class="media-left">
+					<figure class="image is-32x32">
+						<img src="https://bulma.io/images/placeholders/64x64.png">
+					</figure>
+				</div>
+				<div class="media-content">
+					<div class="content">
+						<p>
+							<strong><%= user&.name %></strong>
+							<small>@<%= user&.username %></small>
+							<% if user_signed_in? && User.check_following?(current_user.id,user.id) %>
+								<small><a href="/follows/unfollow?user_id=<%=user.id%>" style="color:red;">unfollow</a></small>
+							<% else %>
+								<small><a href="/follows/dofollow?user_id=<%=user.id%>">follow</a></small>
+							<% end %>
+						</p>
+					</div>
+				</div>
+			</article>
+		</div>
+	<% end %>
+	
+</div>
